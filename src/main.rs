@@ -58,9 +58,17 @@ fn nas_5gs_decoder(nas_hex: Vec<u8>) -> Result<serde_json::Value, serde_json::Er
     Ok(res)
 }
 fn main() {
+    // while true {
+        let now1 = SystemTime::now()
+    .duration_since(UNIX_EPOCH)
+    .expect("Time went backwards");
     let a = "7e 00 68 01 00 65 2e 01 01 c2 11 00 09 01 00 06 31 3f 01 01 ff 01 06 06 13 88 04 7a 12 59 32 29 05 01 ac 1a 64 65 22 01 01 79 00 06 01 20 41 01 01 09 7b 00 18 80 80 21 0a 03 00 00 0a 81 06 08 08 08 08 00 0d 04 08 08 08 08 00 11 00 25 1c 09 69 69 6e 74 65 72 6e 65 74 06 6d 6e 63 30 30 31 06 6d 63 63 30 30 31 04 67 70 72 73 12 01";
     let hex = parse_hex32_string_to_u8_vec(a);
+    let now2 = SystemTime::now()
+    .duration_since(UNIX_EPOCH)
+    .expect("Time went backwards");
+    println!("{} decoded time {:#?}",nas_5gs_decoder(hex).unwrap(), now2 - now1);
+    // }
     
-    println!("{}",nas_5gs_decoder(hex).unwrap());
 
 }
